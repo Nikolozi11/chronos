@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="ka" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Primary Meta Tags / SEO -->
+    <title id="meta-title">ქრონოსი - ისტორიული ანიმაციები</title>
+    <link rel="icon" href="./img/logo.png " type="image/x-icon">     
+    <meta name="title" content="ქრონოსი - ისტორიული ანიმაციები">
+    <meta name="description" content="აღმოაჩინე საქართველოსა და მსოფლიოს ისტორია ვიზუალური ანიმაციებით სრულიად უფასოდ.">
+    <meta name="keywords" content="ისტორია, ანიმაცია, საქართველოს ისტორია, ქრონოსი, ისტორიული ვიდეოები">
+    <meta name="author" content="ქრონოსი">
+
+    <!-- Open Graph / Facebook / Messenger / LinkedIn -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="">
+    <meta property="og:title" id="og-title" content="ქრონოსი - ისტორიული ანიმაციები">
+    <meta property="og:description" id="og-desc" content="აღმოაჩინე ისტორია ვიზუალური ანიმაციებით.">
+    <meta property="og:image" id="og-image" content="">
+
+    <!-- Twitter Card -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="">
+    <meta property="twitter:title" id="twitter-title" content="ქრონოსი - ისტორიული ანიმაციები">
+    <meta property="twitter:description" id="twitter-desc" content="აღმოაჩინე ისტორია ვიზუალური ანიმაციებით.">
+    <meta property="twitter:image" id="twitter-image" content="">
+
+    <!-- Tailwind CSS v3 (Stable CDN) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        slate: {
+                            950: '#020617',
+                            900: '#0f172a',
+                            800: '#1e293b',
+                            700: '#334155',
+                            500: '#64748b',
+                            400: '#94a3b8',
+                            300: '#cbd5e1',
+                            100: '#f1f5f9',
+                        },
+                        amber: {
+                            400: '#fbbf24',
+                            500: '#f59e0b',
+                            700: '#b45309',
+                            950: '#451a03',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=BPG+Banner+Square+Caps:wght@400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        
+        /* Custom Progress Bar */
+        input[type=range].custom-progress {
+            -webkit-appearance: none;
+            appearance: none;
+            background: transparent;
+            cursor: pointer;
+            width: 100%;
+        }
+        input[type=range].custom-progress:focus { outline: none; }
+        input[type=range].custom-progress::-webkit-slider-runnable-track {
+            width: 100%;
+            height: 6px;
+            cursor: pointer;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 9999px;
+            transition: height 0.1s ease;
+        }
+        input[type=range].custom-progress:hover::-webkit-slider-runnable-track { height: 8px; }
+        input[type=range].custom-progress::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            height: 14px;
+            width: 14px;
+            border-radius: 50%;
+            background: #f59e0b;
+            cursor: pointer;
+            margin-top: -4px;
+            box-shadow: 0 0 10px rgba(245, 158, 11, 0.6);
+            transform: scale(0);
+            transition: transform 0.15s ease;
+        }
+        input[type=range].custom-progress:hover::-webkit-slider-thumb,
+        #video-container:hover input[type=range].custom-progress::-webkit-slider-thumb {
+            transform: scale(1);
+        }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col selection:bg-amber-500 selection:text-black">
+
+    <!-- Navbar -->
+    <header class="sticky top-0 z-50 bg-slate-900/80 backdrop-blur-md border-b border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <a href="#home" class="flex items-center gap-3 group">
+                <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-amber-500 to-amber-700 flex items-center justify-center shadow-lg shadow-amber-500/20 group-hover:scale-105 transition">
+                    <i data-lucide="film" class="w-6 h-6 text-black"></i>
+                </div>
+                <div>
+                    <span class="text-xl font-bold tracking-wider text-white block">ქრონოსი</span>
+                    <span class="text-xs text-amber-500 font-medium block">ისტორიული ანიმაციები</span>
+                </div>
+            </a>
+
+            <nav class="flex items-center gap-2 bg-slate-950/60 p-1.5 rounded-2xl border border-slate-800/80">
+                <a href="#home" id="nav-home" class="px-4 sm:px-5 py-2 rounded-xl text-sm font-medium transition flex items-center gap-2">
+                    <i data-lucide="home" class="w-4 h-4"></i> <span class="hidden sm:inline">მთავარი</span>
+                </a>
+                <a href="#search" id="nav-search" class="px-4 sm:px-5 py-2 rounded-xl text-sm font-medium transition flex items-center gap-2">
+                    <i data-lucide="search" class="w-4 h-4"></i> <span class="hidden sm:inline">ძებნა</span>
+                </a>
+            </nav>
+
+            <div class="w-[100px] hidden md:block"></div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full">
+        
+        <!-- HOME VIEW -->
+        <section id="view-home" class="space-y-10">
+            <div class="relative rounded-3xl overflow-hidden bg-gradient-to-r from-amber-950/40 via-slate-900 to-slate-900 border border-slate-800 p-6 sm:p-12 shadow-2xl">
+                <div class="relative z-10 max-w-2xl space-y-4">
+                    <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-amber-500/10 text-amber-400 border border-amber-500/20">
+                        <i data-lucide="sparkles" class="w-3.5 h-3.5"></i> ოფიციალური გალერეა
+                    </span>
+                    <h1 class="text-2xl sm:text-5xl font-extrabold text-white tracking-tight">
+                        აღმოაჩინე ისტორია ვიზუალური ანიმაციებით
+                    </h1>
+                    <p class="text-slate-400 text-sm sm:text-base leading-relaxed">
+                        აირჩიეთ სასურველი ეპიზოდი კოლექციიდან და ჩაერთეთ წარსულის მორევში სრულიად უფასოდ.
+                    </p>
+                </div>
+            </div>
+
+            <div class="flex justify-between items-center border-b border-slate-800 pb-4">
+                <h2 class="text-xl font-bold text-white flex items-center gap-2">
+                    <i data-lucide="play-square" class="w-5 h-5 text-amber-500"></i> ყველა ანიმაცია
+                </h2>
+                <span id="total-count" class="text-xs text-slate-400 bg-slate-900 px-3 py-1 rounded-full border border-slate-800">სულ: 0</span>
+            </div>
+
+            <div id="animations-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+            <div id="pagination-container" class="flex justify-center items-center gap-2 pt-6 flex-wrap"></div>
+        </section>
+
+        <!-- SEARCH VIEW -->
+        <section id="view-search" class="space-y-8 hidden">
+            <div class="max-w-xl mx-auto text-center space-y-4 px-2">
+                <h2 class="text-2xl sm:text-3xl font-extrabold text-white">ანიმაციების ძებნა</h2>
+                <p class="text-slate-400 text-sm">მოძებნეთ სასურველი ვიდეო სათაურის მიხედვით მყისიერად</p>
+                <div class="relative">
+                    <i data-lucide="search" class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400"></i>
+                    <input type="text" id="search-input" placeholder="ჩაწერეთ სათაური (მაგ: გიორგი, ვახტანგი...)" 
+                        class="w-full bg-slate-900 border border-slate-800 rounded-2xl pl-12 pr-4 py-4 text-white placeholder-slate-500 focus:outline-none focus:border-amber-500 transition shadow-inner text-sm sm:text-base">
+                </div>
+            </div>
+            <div id="search-results" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 pt-4"></div>
+        </section>
+
+        <!-- PLAYER VIEW -->
+        <section id="view-player" class="space-y-6 hidden">
+            <button onclick="window.location.hash = '#home'" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 text-sm font-medium transition text-slate-300 cursor-pointer">
+                <i data-lucide="arrow-left" class="w-4 h-4"></i> უკან დაბრუნება
+            </button>
+
+            <div class="bg-slate-900 border border-slate-800 rounded-3xl overflow-hidden shadow-2xl">
+                <!-- Video Container -->
+                <div id="video-container" class="relative w-full bg-black aspect-video flex items-center justify-center group select-none cursor-pointer">
+                    <video id="main-video-player" class="w-full h-full object-contain" preload="metadata" playsinline></video>
+
+                    <!-- Center Play Button -->
+                    <div id="big-play-btn" class="absolute inset-0 flex items-center justify-center bg-black/30 transition-opacity duration-300 pointer-events-none">
+                        <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-amber-500 text-black flex items-center justify-center shadow-2xl shadow-amber-500/50 transform scale-90 group-hover:scale-110 transition duration-300">
+                            <i data-lucide="play" id="big-play-icon" class="w-6 h-6 sm:w-8 sm:h-8 fill-black ml-1"></i>
+                        </div>
+                    </div>
+
+                    <!-- Controls Bar -->
+                    <div id="video-controls" class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-slate-950 via-slate-950/80 to-transparent p-3 sm:p-4 flex flex-col gap-2 transition-opacity duration-300 opacity-0">
+                        <div class="w-full flex items-center">
+                            <input type="range" id="progress-bar" value="0" min="0" max="100" step="0.1" class="custom-progress">
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center gap-3 sm:gap-4">
+                                <button id="play-pause-btn" class="text-white hover:text-amber-500 transition cursor-pointer p-1">
+                                    <i data-lucide="play" class="w-5 h-5 sm:w-6 sm:h-6 fill-white"></i>
+                                </button>
+                                <button id="mute-btn" class="text-white hover:text-amber-500 transition cursor-pointer p-1">
+                                    <i data-lucide="volume-2" class="w-4 h-4 sm:w-5 sm:h-5"></i>
+                                </button>
+                                <span id="time-display" class="text-xs text-slate-300 font-medium">0:00 / 0:00</span>
+                            </div>
+                            <div class="flex items-center gap-4">
+                                <button id="fullscreen-btn" class="text-white hover:text-amber-500 transition cursor-pointer p-1">
+                                    <i data-lucide="maximize" class="w-4 h-4 sm:w-5 sm:h-5"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Meta & Share Button -->
+                <div class="p-6 sm:p-8 md:p-10 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-t border-slate-800/80">
+                    <div class="space-y-1.5">
+                        <span id="player-category" class="text-xs font-semibold text-amber-500 uppercase tracking-wider block"></span>
+                        <h2 id="player-title" class="text-xl sm:text-2xl font-bold text-white"></h2>
+                    </div>
+                    <button onclick="openShareModal()" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-2xl bg-amber-500 hover:bg-amber-400 text-black font-semibold transition shadow-lg shadow-amber-500/20 cursor-pointer shrink-0">
+                        <i data-lucide="share-2" class="w-5 h-5"></i> გაზიარება
+                    </button>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Share Modal -->
+    <div id="share-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm opacity-0 pointer-events-none transition-all duration-300 p-4">
+        <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6 sm:p-8 max-w-lg w-full shadow-2xl transform scale-95 transition-all duration-300" id="share-modal-content">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-lg sm:text-xl font-bold text-white flex items-center gap-2">
+                    <i data-lucide="share-2" class="w-5 h-5 text-amber-500"></i> ვიდეოს გაზიარება
+                </h3>
+                <button onclick="closeShareModal()" class="text-slate-400 hover:text-white p-1 rounded-xl transition cursor-pointer">
+                    <i data-lucide="x" class="w-5 h-5"></i>
+                </button>
+            </div>
+
+            <div class="space-y-5">
+                <div>
+                    <label class="text-xs font-medium text-slate-400 block mb-3">გაიზიარე სოციალურ ქსელებში</label>
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                        <!-- Facebook SVG -->
+                        <a id="share-fb" href="#" target="_blank" class="flex flex-col items-center justify-center gap-1.5 p-3 rounded-2xl bg-blue-600/10 hover:bg-blue-600/20 text-blue-400 border border-blue-500/20 font-medium text-xs transition">
+                            <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg> Facebook
+                        </a>
+                        <!-- Messenger SVG -->
+                        <a id="share-messenger" href="#" target="_blank" class="flex flex-col items-center justify-center gap-1.5 p-3 rounded-2xl bg-indigo-600/10 hover:bg-indigo-600/20 text-indigo-400 border border-indigo-500/20 font-medium text-xs transition">
+                            <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 4.974 0 11.111c0 3.497 1.745 6.616 4.472 8.652V24l4.08-2.242c1.09.303 2.248.464 3.448.464 6.627 0 12-4.974 12-11.111S18.627 0 12 0zm1.109 14.655l-2.812-3.002-5.485 3.002 6.029-6.394 2.812 3.002 5.485-3.002-6.029 6.394z"/></svg> Messenger
+                        </a>
+                        <!-- WhatsApp SVG -->
+                        <a id="share-wa" href="#" target="_blank" class="flex flex-col items-center justify-center gap-1.5 p-3 rounded-2xl bg-emerald-600/10 hover:bg-emerald-600/20 text-emerald-400 border border-emerald-500/20 font-medium text-xs transition">
+                            <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.124-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg> WhatsApp
+                        </a>
+                        <!-- Telegram SVG -->
+                        <a id="share-tg" href="#" target="_blank" class="flex flex-col items-center justify-center gap-1.5 p-3 rounded-2xl bg-sky-500/10 hover:bg-sky-500/20 text-sky-400 border border-sky-500/20 font-medium text-xs transition">
+                            <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.446 1.394c-.14.14-.26.26-.534.26l.213-3.053 5.56-5.022c.24-.213-.054-.334-.373-.121l-6.869 4.326-2.96-.924c-.64-.203-.659-.64.135-.954l11.566-4.458c.538-.196 1.006.128.832.941z"/></svg> Telegram
+                        </a>
+                    </div>
+                </div>
+
+                <div class="bg-slate-950 border border-slate-800 rounded-2xl p-3.5 text-xs text-slate-400 flex items-start gap-2.5">
+                    <i data-lucide="info" class="w-4 h-4 text-amber-500 shrink-0 mt-0.5"></i>
+                    <span>TikTok-სა და Instagram-ზე პირდაპირი ბმულის გაზიარება ხდება ბმულის კოპირებით (ბიოში ან პირად შეტყობინებაში ჩასასმელად).</span>
+                </div>
+
+                <div>
+                    <label class="text-xs font-medium text-slate-400 block mb-2">პირდაპირი ბმული</label>
+                    <div class="flex items-center gap-2 bg-slate-950 border border-slate-800 rounded-2xl p-2">
+                        <input type="text" id="share-link-input" readonly class="bg-transparent text-sm text-slate-300 px-3 w-full focus:outline-none">
+                        <button onclick="copyShareLink()" class="px-4 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-black font-semibold text-sm transition shadow-md cursor-pointer flex items-center gap-1.5 whitespace-nowrap">
+                            <i data-lucide="copy" class="w-4 h-4"></i> ასლი
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="border-t border-slate-800/80 py-8 text-center text-xs text-slate-500 mt-20 bg-slate-900/30">
+        ქრონოსი &copy; 2026 — ყველა უფლება დაცულია.
+    </footer>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-20 opacity-0 transition-all duration-300 bg-slate-900 border border-slate-800 px-5 py-3 rounded-2xl shadow-2xl flex items-center gap-3">
+        <i data-lucide="check-circle" class="w-5 h-5 text-amber-500"></i>
+        <span id="toast-msg" class="text-sm font-medium text-white">ბმული წარმატებით დაკოპირდა!</span>
+    </div>
+
+    <!-- JavaScript Application Logic -->
+    <script>
+        const animations = [
+            { id: 1, title: "წმინდა გიორგი", category: "რელიგიური ისტორია", duration: "03:10", src: "video/wminda_giorgi.mp4", year: "III ს." },
+            { id: 2, title: "წმინდა ნიკოლოზი", category: "რელიგიური ისტორია", duration: "02:45", src: "video/wminda_nikolozi.mp4", year: "IV ს." },
+            { id: 3, title: "გიორგი მაზნიაშვილი", category: "ეროვნული ისტორია", duration: "03:15", src: "video/giorgi_mazniashvili.mp4", year: "XX ს." },
+            { id: 4, title: "ვახტანგ გორგასალი", category: "ანტიკური ხანა", duration: "03:40", src: "video/vaxtang_gorgasali.mp4", year: "V ს." },
+            { id: 5, title: "წმინდა ბარბარე", category: "რელიგიური ისტორია", duration: "02:50", src: "video/wminda_barbare.mp4", year: "III ს." },
+        ];
+
+        const ITEMS_PER_PAGE = 6;
+        let currentPage = 1;
+        let currentAnimation = null;
+        let hideTimeout = null;
+
+        function stopActiveVideo() {
+            const video = document.getElementById('main-video-player');
+            if (video) {
+                video.pause();
+                video.currentTime = 0;
+                video.src = "";
+            }
+            if (hideTimeout) clearTimeout(hideTimeout);
+        }
+
+        function updateSEO(title, description) {
+            const fullTitle = title ? `${title} — ქრონოსი` : "ქრონოსი - ისტორიული ანიმაციები";
+            const fullDesc = description || "აღმოაჩინე ისტორია ვიზუალური ანიმაციებით სრულიად უფასოდ.";
+            document.getElementById('meta-title').innerText = fullTitle;
+            document.querySelector('meta[name="title"]').setAttribute('content', fullTitle);
+            document.querySelector('meta[name="description"]').setAttribute('content', fullDesc);
+        }
+
+        function parseHash() {
+            const hash = window.location.hash || '#home';
+            if (!hash.startsWith('#watch')) {
+                stopActiveVideo();
+            }
+
+            document.getElementById('view-home').classList.add('hidden');
+            document.getElementById('view-search').classList.add('hidden');
+            document.getElementById('view-player').classList.add('hidden');
+            
+            document.getElementById('nav-home').className = "px-4 sm:px-5 py-2 rounded-xl text-sm font-medium transition flex items-center gap-2 text-slate-400 hover:text-white";
+            document.getElementById('nav-search').className = "px-4 sm:px-5 py-2 rounded-xl text-sm font-medium transition flex items-center gap-2 text-slate-400 hover:text-white";
+
+            if (hash.startsWith('#watch')) {
+                const params = new URLSearchParams(hash.split('?')[1]);
+                const id = parseInt(params.get('id'));
+                showWatchView(id);
+            } else if (hash === '#search') {
+                document.getElementById('view-search').classList.remove('hidden');
+                document.getElementById('nav-search').className = "px-4 sm:px-5 py-2 rounded-xl text-sm font-medium transition flex items-center gap-2 bg-amber-500 text-black font-semibold shadow-lg shadow-amber-500/20";
+                updateSEO("ანიმაციების ძებნა", "მოძებნეთ სასურველი ისტორიული ვიდეო სათაურის მიხედვით.");
+                renderSearch("");
+            } else {
+                document.getElementById('view-home').classList.remove('hidden');
+                document.getElementById('nav-home').className = "px-4 sm:px-5 py-2 rounded-xl text-sm font-medium transition flex items-center gap-2 bg-amber-500 text-black font-semibold shadow-lg shadow-amber-500/20";
+                updateSEO();
+                renderHome();
+            }
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        window.addEventListener('hashchange', parseHash);
+
+        function renderHome() {
+            document.getElementById('total-count').innerText = `სულ: ${animations.length}`;
+            const totalPages = Math.ceil(animations.length / ITEMS_PER_PAGE) || 1;
+            if (currentPage > totalPages) currentPage = totalPages;
+
+            const start = (currentPage - 1) * ITEMS_PER_PAGE;
+            const currentItems = animations.slice(start, start + ITEMS_PER_PAGE);
+
+            const grid = document.getElementById('animations-grid');
+            grid.innerHTML = currentItems.map(anim => `
+                <div onclick="window.location.hash='#watch?id=${anim.id}'" class="group bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden hover:border-amber-500/50 transition-all duration-300 hover:shadow-2xl hover:shadow-amber-500/10 cursor-pointer flex flex-col justify-between">
+                    <div class="relative aspect-video bg-black flex items-center justify-center overflow-hidden">
+                        <video class="w-full h-full object-cover group-hover:scale-105 transition duration-500 opacity-80" preload="metadata" src="${anim.src}"></video>
+                        <div class="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition flex items-center justify-center">
+                            <div class="w-12 h-12 rounded-full bg-amber-500 text-black flex items-center justify-center shadow-lg transform scale-90 group-hover:scale-110 transition">
+                                <i data-lucide="play" class="w-5 h-5 fill-black ml-0.5"></i>
+                            </div>
+                        </div>
+                        <span class="absolute top-3 left-3 bg-slate-950/80 backdrop-blur-md text-xs font-semibold px-2.5 py-1 rounded-lg border border-slate-800 text-amber-400">${anim.year}</span>
+                    </div>
+                    <div class="p-5 space-y-2">
+                        <span class="text-xs text-slate-500 uppercase font-semibold">${anim.category}</span>
+                        <h3 class="text-lg font-bold text-white group-hover:text-amber-400 transition">${anim.title}</h3>
+                    </div>
+                </div>
+            `).join('');
+
+            const pagination = document.getElementById('pagination-container');
+            let pagesHtml = '';
+            for (let i = 1; i <= totalPages; i++) {
+                pagesHtml += `<button onclick="changePage(${i})" class="w-10 h-10 rounded-xl font-bold text-sm transition cursor-pointer ${currentPage === i ? 'bg-amber-500 text-black shadow-lg shadow-amber-500/20' : 'bg-slate-900 border border-slate-800 text-slate-300 hover:bg-slate-800'}">${i}</button>`;
+            }
+            pagination.innerHTML = pagesHtml;
+            lucide.createIcons();
+        }
+
+        function changePage(page) {
+            currentPage = page;
+            renderHome();
+        }
+
+        const searchInputEl = document.getElementById('search-input');
+        if (searchInputEl) {
+            searchInputEl.addEventListener('input', (e) => {
+                renderSearch(e.target.value);
+            });
+        }
+
+        function renderSearch(query) {
+            const filtered = animations.filter(anim => anim.title.toLowerCase().includes(query.toLowerCase()));
+            const container = document.getElementById('search-results');
+            
+            if (filtered.length === 0) {
+                container.innerHTML = `<div class="col-span-full text-center py-16 text-slate-500">ვერაფერი მოიძებნა ამ სათაურით</div>`;
+                return;
+            }
+
+            container.innerHTML = filtered.map(anim => `
+                <div onclick="window.location.hash='#watch?id=${anim.id}'" class="group bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden hover:border-amber-500/50 transition-all duration-300 hover:shadow-2xl cursor-pointer flex flex-col justify-between">
+                    <div class="relative aspect-video bg-black flex items-center justify-center overflow-hidden">
+                        <video class="w-full h-full object-cover group-hover:scale-105 transition duration-500 opacity-80" preload="metadata" src="${anim.src}"></video>
+                        <div class="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition flex items-center justify-center">
+                            <div class="w-12 h-12 rounded-full bg-amber-500 text-black flex items-center justify-center shadow-lg transform scale-90 group-hover:scale-110 transition">
+                                <i data-lucide="play" class="w-5 h-5 fill-black ml-0.5"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-5 space-y-2">
+                        <span class="text-xs text-slate-500 uppercase font-semibold">${anim.category}</span>
+                        <h3 class="text-lg font-bold text-white group-hover:text-amber-400 transition">${anim.title}</h3>
+                    </div>
+                </div>
+            `).join('');
+            lucide.createIcons();
+        }
+
+        function showWatchView(id) {
+            currentAnimation = animations.find(a => a.id === id);
+            if (!currentAnimation) {
+                window.location.hash = '#home';
+                return;
+            }
+
+            updateSEO(currentAnimation.title, `უყურეთ ისტორიულ ანიმაციას: ${currentAnimation.title}`);
+
+            document.getElementById('view-player').classList.remove('hidden');
+            document.getElementById('player-title').innerText = currentAnimation.title;
+            document.getElementById('player-category').innerText = currentAnimation.category;
+
+            const video = document.getElementById('main-video-player');
+            const playPauseBtn = document.getElementById('play-pause-btn');
+            const bigPlayBtn = document.getElementById('big-play-btn');
+            const muteBtn = document.getElementById('mute-btn');
+            const progressBar = document.getElementById('progress-bar');
+            const timeDisplay = document.getElementById('time-display');
+            const fullscreenBtn = document.getElementById('fullscreen-btn');
+            const videoContainer = document.getElementById('video-container');
+            const videoControls = document.getElementById('video-controls');
+
+            video.src = currentAnimation.src;
+            video.load();
+
+            function showControls() {
+                videoControls.classList.remove('opacity-0');
+                videoContainer.classList.remove('cursor-none');
+                clearTimeout(hideTimeout);
+                if (!video.paused) {
+                    hideTimeout = setTimeout(() => {
+                        videoControls.classList.add('opacity-0');
+                        videoContainer.classList.add('cursor-none');
+                    }, 2500);
+                }
+            }
+
+            videoContainer.onmousemove = showControls;
+            videoContainer.onmouseleave = () => {
+                if (!video.paused) {
+                    videoControls.classList.add('opacity-0');
+                    videoContainer.classList.add('cursor-none');
+                }
+            };
+
+            function formatTime(seconds) {
+                const mins = Math.floor(seconds / 60);
+                const secs = Math.floor(seconds % 60);
+                return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
+            }
+
+            function togglePlay() {
+                if (video.paused) {
+                    video.play();
+                } else {
+                    video.pause();
+                }
+            }
+
+            video.onplay = () => {
+                bigPlayBtn.classList.add('opacity-0');
+                playPauseBtn.innerHTML = `<i data-lucide="pause" class="w-5 h-5 sm:w-6 sm:h-6 fill-white"></i>`;
+                lucide.createIcons();
+                showControls();
+            };
+
+            video.onpause = () => {
+                bigPlayBtn.classList.remove('opacity-0');
+                playPauseBtn.innerHTML = `<i data-lucide="play" class="w-5 h-5 sm:w-6 sm:h-6 fill-white"></i>`;
+                lucide.createIcons();
+                videoControls.classList.remove('opacity-0');
+                videoContainer.classList.remove('cursor-none');
+                clearTimeout(hideTimeout);
+            };
+
+            bigPlayBtn.onclick = togglePlay;
+            video.onclick = togglePlay;
+            playPauseBtn.onclick = togglePlay;
+
+            video.ontimeupdate = () => {
+                if (video.duration) {
+                    const percentage = (video.currentTime / video.duration) * 100;
+                    progressBar.value = percentage;
+                    progressBar.style.background = `linear-gradient(to right, #f59e0b ${percentage}%, rgba(255, 255, 255, 0.2) ${percentage}%)`;
+                    timeDisplay.innerText = `${formatTime(video.currentTime)} / ${formatTime(video.duration)}`;
+                }
+            };
+
+            progressBar.oninput = (e) => {
+                const time = (e.target.value / 100) * video.duration;
+                video.currentTime = time;
+                const percentage = e.target.value;
+                progressBar.style.background = `linear-gradient(to right, #f59e0b ${percentage}%, rgba(255, 255, 255, 0.2) ${percentage}%)`;
+            };
+
+            muteBtn.onclick = () => {
+                video.muted = !video.muted;
+                muteBtn.innerHTML = video.muted ? `<i data-lucide="volume-x" class="w-4 h-4 sm:w-5 sm:h-5 text-amber-500"></i>` : `<i data-lucide="volume-2" class="w-4 h-4 sm:w-5 sm:h-5"></i>`;
+                lucide.createIcons();
+            };
+
+            fullscreenBtn.onclick = () => {
+                if (!document.fullscreenElement) {
+                    videoContainer.requestFullscreen().catch(err => alert(err.message));
+                } else {
+                    document.exitFullscreen();
+                }
+            };
+
+            lucide.createIcons();
+        }
+
+        function openShareModal() {
+            const modal = document.getElementById('share-modal');
+            const modalContent = document.getElementById('share-modal-content');
+            const shareUrl = window.location.href;
+            const shareTitle = currentAnimation ? `უყურე ისტორიულ ანიმაციას: ${currentAnimation.title}` : 'ქრონოსი - ისტორიული ანიმაციები';
+
+            document.getElementById('share-link-input').value = shareUrl;
+            
+            document.getElementById('share-fb').href = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`;
+            document.getElementById('share-messenger').href = `fb-messenger://share/?link=${encodeURIComponent(shareUrl)}`;
+            document.getElementById('share-wa').href = `https://api.whatsapp.com/send?text=${encodeURIComponent(shareTitle + " " + shareUrl)}`;
+            document.getElementById('share-tg').href = `https://t.me/share/url?url=${encodeURIComponent(shareUrl)}&text=${encodeURIComponent(shareTitle)}`;
+
+            modal.classList.remove('opacity-0', 'pointer-events-none');
+            modalContent.classList.remove('scale-95');
+            modalContent.classList.add('scale-100');
+        }
+
+        function closeShareModal() {
+            const modal = document.getElementById('share-modal');
+            const modalContent = document.getElementById('share-modal-content');
+
+            modal.classList.add('opacity-0', 'pointer-events-none');
+            modalContent.classList.remove('scale-100');
+            modalContent.classList.add('scale-95');
+        }
+
+        function copyShareLink() {
+            const input = document.getElementById('share-link-input');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(input.value);
+            showToast("ბმული წარმატებით დაკოპირდა ბუფერში!");
+            closeShareModal();
+        }
+
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            const toastMsg = document.getElementById('toast-msg');
+            if (toastMsg) toastMsg.innerText = msg;
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            setTimeout(() => {
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 3000);
+        }
+
+        // Initialize App on Page Load
+        window.addEventListener('DOMContentLoaded', () => {
+            parseHash();
+            lucide.createIcons();
+        });
+    </script>
+</body>
+</html>
